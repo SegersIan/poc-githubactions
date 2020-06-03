@@ -61,4 +61,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: neptunesoftware/tools:latest
+    steps:
+      - name: Check contents
+        run: aws -v
+      
 
