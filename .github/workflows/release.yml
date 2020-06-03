@@ -25,6 +25,7 @@ jobs:
         # A file, directory or wildcard pattern that describes what to upload
         path: dist/*
   package:
+    needs: preflight
     runs-on: ubuntu-latest
     steps:
     - name: Download a Build Artifact
