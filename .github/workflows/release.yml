@@ -49,11 +49,12 @@ jobs:
         # Destination path
         path: .
     - name: List artifacts
-      run: ls
+      run: cat index.js
   cleanup:
     needs: [packageA, packageB]
     runs-on: ubuntu-latest
     steps:
       - name: cleanup
         run: echo "do cleanup"
+    
 
