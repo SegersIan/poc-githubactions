@@ -1,0 +1,26 @@
+{
+  "name": "poc-githubactions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/index.js",
+    "build": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SegersIan/poc-githubactions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SegersIan/poc-githubactions/issues"
+  },
+  "homepage": "https://github.com/SegersIan/poc-githubactions#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pkg": "^4.4.8",
+    "typescript": "^3.9.3"
+  }
+}
