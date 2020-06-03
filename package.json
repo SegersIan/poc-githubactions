@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "node test/index.js",
-    "build": ""
+    "transpile": "tsc ./src/* --outDir ./dist",
+    "build": "echo todo"
   },
   "repository": {
     "type": "git",
