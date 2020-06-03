@@ -56,5 +56,9 @@ jobs:
     steps:
       - name: cleanup
         run: echo "do cleanup"
-    
+  containerjob:
+    needs: [cleanup]
+    runs-on: ubuntu-latest
+    container:
+      image: neptunesoftware/tools:latest
 
