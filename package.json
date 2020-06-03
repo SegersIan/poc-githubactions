@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node test/index.js",
     "transpile": "tsc ./src/* --outDir ./dist",
-    "build": "echo todo"
+    "build:docker": "docker build -t iansegers/mycoolrepo:latest ."
   },
   "repository": {
     "type": "git",
