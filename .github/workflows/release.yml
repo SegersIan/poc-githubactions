@@ -7,62 +7,28 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:  
-  preflight:
+  main:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install
-      run: npm install
-    - name: Test
-      run: npm test
-    - name: transpile
-      run: npm run transpile
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        # Artifact name
-        name: TranspiledSrc # optional
-        # A file, directory or wildcard pattern that describes what to upload
-        path: dist/*
-  packageA:
-    needs: preflight
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v2
-      with:
-        # Artifact name
-        name: TranspiledSrc
-        # Destination path
-        path: .
-    - name: List artifacts
-      run: ls
-  packageB:
-    needs: preflight
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v2
-      with:
-        # Artifact name
-        name: TranspiledSrc
-        # Destination path
-        path: .
-    - name: List artifacts
-      run: cat index.js
-  cleanup:
-    needs: [packageA, packageB]
-    runs-on: ubuntu-latest
-    steps:
-      - name: cleanup
-        run: echo "do cleanup"
-  containerjob:
-    needs: [cleanup]
-    runs-on: ubuntu-latest
-    container:
-      image: neptunesoftware/tools:latest
-    steps:
-      - name: Check contents
-        run: aws -v
-      
-
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: user/app:latest
+      -
+        name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
