@@ -12,4 +12,8 @@ jobs:
     steps:
       - name: TRY ENV
         uses: azure/CLI@v1
-        run: az version
+        with:
+          azcliversion: 2.13.0
+          inlineScript: |
+            az version
+            
